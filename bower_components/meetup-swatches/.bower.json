@@ -1,0 +1,30 @@
+{
+  "name": "meetup-swatches",
+  "description": "Color swatches for Meetup",
+  "main": "./sass",
+  "ignore": [
+    "**/*.rb",
+    "**/*.yaml",
+    "**/*.podspec",
+    "**/*.erb",
+    "**/*.html",
+    "**/*.lock",
+    "**/*.json",
+    "**/*.xml",
+    ".ruby-version",
+    "Gemfile",
+    "./android",
+    "./ios"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/meetup/meetup-swatches",
+  "_release": "d803f46cd9",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "d803f46cd9b585d2637890e3b045be8f9f3ea47b"
+  },
+  "_source": "git://github.com/meetup/meetup-swatches.git",
+  "_target": "master",
+  "_originalSource": "meetup-swatches"
+}

@@ -1,0 +1,314 @@
+@if $platform == "desktop" {
+	html {
+		overflow-y: scroll;
+		font-size: 100%;
+		-webkit-text-size-adjust: 100%;
+		-ms-text-size-adjust: 100%;
+	}
+	html, body {
+		@include color_textSecondary();
+		font-size: $baseFontSize;
+		line-height: $baseLineHeight;
+		font-family: $baseFontStack;
+		font-weight: $W_normal;
+		margin: 0;
+		padding: 0;
+	}
+
+	::-moz-selection {
+		background: $C_red;
+		color: #fff;
+	}
+	::selection {
+		background: $C_red;
+		color: #fff;
+	}
+
+	// Override default text color for "inverted" contexts
+	// (over deark backgrounds, photos, etc.)
+	.inverted {
+		@include color_textSecondaryInverted();
+
+		::-moz-selection {
+			background: opacify(#fff, 1);
+			color: $C_red;
+		}
+		::selection {
+			background: opacify(#fff, 1);
+			color: $C_red;
+		}
+	}
+
+	/* {{{ Inline tag defaults */
+	abbr, strong, acronym, span, small, time, strike, sub, sup, a {
+		display: inline;
+	}
+	abbr, acronym {
+		border-width: 0;
+	}
+	b,strong { font-weight: $W_bold; }
+	sup, sub {
+		font-size: 75%;
+		line-height: 0;
+		position: relative;
+		vertical-align: baseline;
+	}
+	sup { top: -0.5em; }
+	sub { bottom: -0.25em; }
+	/* }}} */
+
+	/* {{{ Block tag defaults */
+	p, ul, ol, blockquote,
+	form, fieldset, legend,
+	table, dl,dd,
+	article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+		margin: 0;
+		padding: 0;
+		margin-bottom: $spacing;
+	}
+	form, legend {
+		margin-bottom: 0;
+	}
+	img {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		line-height: 0;
+		&.resample { /* assuming we're sizing an img down on the client */
+			-ms-interpolation-mode: bicubic;
+			image-rendering: optimizeQuality;
+		}
+	}
+	ul, ol {
+		list-style-position: outside;
+		padding-left: 1.33em; /* indent by default */
+	}
+	li {
+		margin: 0;
+		padding: 0;
+	}
+	/* }}} */
+
+	/* {{{ HTML5 element defaults (for when the time comes) */
+	article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+		display: block;
+	}
+	audio, canvas, video {
+		display: inline-block;
+		@include inlineblock();
+	}
+	/* }}} */
+
+	/* {{{ Link defaults */
+	a,
+	a:link, a:visited,
+	a:hover, a:active {
+		 cursor: hand;
+		 cursor: pointer;
+		color: $C_blue;
+		text-decoration: none;
+	}
+	a:visited {
+		color: $C_blue;
+	}
+	a:hover, a:active {
+		text-decoration: underline;
+		color: $C_blue;
+	}
+	a:active {
+		 color: darken($C_blue, 10%);
+	}
+	/* }}} */
+
+	/* {{{ Headings */
+	h1,h2,h3,h4,h5,h6 {
+		@include color_textPrimary();
+		font-family: $headingFontStack;
+		margin: 0;
+		padding: 0;
+		padding-bottom: $baseline/2;
+		line-height: 1.1;
+		font-weight: $W_bold;
+		.inverted & {
+			@include color_textPrimaryInverted();
+		}
+	}
+	h1 {
+		font-size: $h1FontSize;
+		letter-spacing: -0.75px;
+	}
+	h2 {
+		font-size: $h2FontSize;
+		letter-spacing: -0.5px;
+	}
+	h3 {
+		font-size: $h3FontSize;
+		padding-bottom: $baseline/3;
+		line-height: 1.2;
+		letter-spacing: -0.25px;
+	}
+	h4{
+		font-size: $h4FontSize;
+		padding-bottom: 0;
+		line-height: $baseLineHeight;
+		letter-spacing: -0.05px;
+	}
+	h5 {
+		font-size: $h5FontSize;
+		padding-bottom: 0;
+		line-height: $baseLineHeight;
+
+		font-weight: $W_normal;
+	}
+	h6 {
+		font-size: $h6FontSize;
+		padding-bottom: 0;
+		line-height: $baseLineHeight;
+
+		text-transform: uppercase;
+		font-variant: small-caps;
+		font-weight: $W_normal;
+	}
+	/* }}} */
+}
+
+
+/*  TODO Please kill this. -j */
+/*  NOTE
+ *  This is a terrible, hacky mixin, but I can't tell 
+ *  why it's being overridden elsewhere ATM. -j
+ */
+@mixin pholder() {
+	 color: #b3b3b3 !important; /* == $C_gray70 in `_tl_parameters.scss` */
+	 font-style: normal !important;
+}
+
+@if $platform == "mobile" {
+	/* {{{ RESETS, 	NOTE: this is most likely diff from full site sassquatch, 
+					we are using boilerplate that comes with mobile resets */
+
+	html, body {
+		font-size: $baseFontSize;
+		color: $C_secondaryGray;
+	} 
+
+	// Override default text color for "inverted" contexts
+	// (over deark backgrounds, photos, etc.)
+	.inverted {
+		color: $C_secondaryGrayInverted;
+	}
+
+	p {
+		line-height:1.5;
+	}
+
+	/* {{{ Block tag defaults */
+
+	p,ul,ol,li
+	blockquote, form, fieldset, legend,
+	table, dl,dd,
+	article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+		margin: 0;
+		padding: 0;
+		margin-bottom: $spacing;
+	}
+	form, legend {
+		margin-bottom: 0;
+	}
+	img {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		&.resample { 
+			-ms-interpolation-mode: bicubic; 
+			image-rendering: optimizeQuality;
+		}
+	}
+
+	ul, ol {
+		list-style-position: inside;
+		//NOTE: taking out padding
+	}
+
+	/* }}} */
+
+
+	/* {{{ Link defaults */
+
+	a:link, a:visited, a:hover, a:active {
+		text-decoration: none;	
+		color: $C_blue;
+	}
+
+	.linked {
+		color: $C_blue !important;
+	}
+
+	/* }}} */
+
+	/* {{{ Headings */
+
+	h1,h2,h3,h4,h5,h6 {
+		font-family: $headingFontStack;
+		font-weight: $W_bold;
+		color: $C_primaryGray;
+		margin: 0;
+		padding: 0;
+		padding-bottom: $baseline/2;
+		line-height: 1.2;
+		
+		.inverted & {
+			color: $C_primaryGray;
+		}
+	}
+	h1 { 
+		font-size: $h1FontSize; 
+		letter-spacing: -0.75px; 
+	}
+	h2 { 
+		font-size: $h2FontSize; 
+		letter-spacing: -0.5px; 
+	}
+	h3 { 
+		font-weight: $W_normal;
+		font-size: $h3FontSize; 
+	}
+	h4 { font-size: $h4FontSize }
+	h5 { font-weight: $W_normal; font-size: $h5FontSize; }
+	h6 { font-size: $h6FontSize; }  /* probably won't use it, but it's in the html spec, so worth defining a default */
+
+	/* }}} */
+
+
+	/*  {{{ Override input styles */
+	/**
+	* Placeholder styles
+	*/
+	textarea::-webkit-input-placeholder, 
+	input::-webkit-input-placeholder { 
+		 @include pholder();
+	}
+	textarea:-moz-placeholder,
+	input:-moz-placeholder { 
+		 @include pholder();
+	}
+	textarea:-ms-input-placeholder, 
+	input:-ms-input-placeholder {
+		 @include pholder();
+	}
+	/* }}} */
+
+
+	/* {{{ Widget helpers (graceful degradation for JS features) */
+	.block-if-js,
+	.inline-if-js,
+	.inline-block-if-js,
+	.hasJS .hide-if-js {	
+		display: none;
+	}
+
+	.hasJS .block-if-js			{ display: block; }
+	.hasJS .inline-if-js		{ display: inline; }
+	.hasJS .inline-block-if-js	{ display: inline-block; }
+	/* }}} */
+}

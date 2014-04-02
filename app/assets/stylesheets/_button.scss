@@ -1,0 +1,430 @@
+$baseline: 18px;
+$C_secondaryGray: rgba(0,0,0,0.67);
+$C_lineGray: rgba(0,0,0,0.1);
+$C_tertiaryGray: rgba(0,0,0,0.47);
+$opacity: 1;
+$value: unquote("progid:DXImageTransform.Microsoft.Alpha(Opacity=#{round($opacity * 100)})");
+$C_secondaryGrayInverted: rgba(255,255,255,0.67);
+$C_lineGrayInverted: rgba(255,255,255,0.2);
+$C_red: rgb(226,55,60);
+$platform: "desktop";
+$baseFontStack: "Helvetica Neue", "Roboto", "Droid Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+$W_bold: 700;
+$uiControlFontStack:  $baseFontStack;
+
+
+// Line 12
+@mixin round($nw, $ne: $nw, $se: $nw, $sw: $nw){
+  -moz-border-radius: $nw $ne $se $sw;
+  -webkit-border-radius: $nw $ne $se $sw;
+  border-radius: $nw $ne $se $sw;
+}
+//line 84
+@mixin inlineblock() {
+  display: inline-block;
+  zoom: 1;
+  *display: inline; }
+
+//
+@mixin box-sizing($type : "border") {
+  /* Acceptable values are border, content, and padding - content is the default W3C model */
+  box-sizing: #{$type}-box;
+  -webkit-box-sizing: #{$type}-box;
+  -moz-box-sizing: #{$type}-box;
+}
+
+@mixin experimental($property, $value, $moz: true, $webkit: true, $o: false, $ms: true, $khtml: false, $official: true) {
+  $value: unquote($value);
+  @if $moz {
+    -moz-#{$property}: $value; }
+  @if $webkit {
+    -webkit-#{$property}: $value; }
+  @if $o {
+    -o-#{$property}: $value; }
+  @if $ms {
+    -ms-#{$property}: $value; }
+  @if $khtml {
+    -khtml-#{$property}: $value; }
+  @if $official {
+    #{$property}: $value; } }
+
+// Defined line 225
+%button_personality {
+  @include experimental('user-select', 'none');
+  cursor: pointer;
+  text-decoration: none!important;
+}
+
+@mixin button_personality() {
+  // mixin for legacy support of @include button_personality
+  @extend %button_personality;
+}
+
+@mixin button-flat( $color ) {
+  @extend %_button_base_flat;
+  color: $color !important;
+  background: transparent;
+  border: 2px solid $color;
+
+  &:hover {
+    background: $color;
+    color: getPrimaryTextColor($color) !important;
+  }
+}
+
+@mixin button-photo( $color ) {
+  @extend %_button_base_flat;
+  color: $color !important;
+  background: rgba(0,0,0,0.25);
+  border: 2px solid $color;
+
+  &:hover {
+    background: $color;
+    color: getPrimaryTextColor($color) !important;
+  }
+}
+
+
+%button-flat,
+%button-flat--gray,
+.button-flat,
+.button-flat--gray {
+  @include button-flat( #777 );
+}
+
+@mixin button( $bgColor: $C_tertiaryGray, $textColor: "" ) {
+  $borderOffset: 25%;
+
+  @if $textColor == "" {
+    $textColor: getPrimaryTextColor($bgColor);
+  }
+
+  @extend %_button_base;
+  @if $platform == "desktop" {
+    @extend %_chrome_button_fix;
+  }
+  @include box-shadow(darken($bgColor, $borderOffset), 0px, 2px, 0px, 0px);
+  color: $textColor !important; // need this for chapstick
+  background: $bgColor;
+
+  &:active {
+    @include box-shadow(darken($bgColor, $borderOffset), 0px, 0px, 0px, 0px);
+    @include transform(translate(0px, 2px));
+  }
+
+  &:hover {
+    background:  darken($bgColor, 8%);
+  }
+
+  &.disabled,
+  &:disabled {
+    opacity: 0.4;
+    cursor: normal;
+    &:hover {
+      background: $bgColor;
+    }
+    &:active {
+      @include transform(translate(0px, 0px));
+      @include box-shadow($C_tertiaryGray, 0px, 2px, 0px, 0px);
+    }
+  }
+}
+// Line 308
+@mixin transition($t) {
+  @include experimental(transition, $t, -moz, -webkit, -o, -ms, not -khtml, official);
+}
+
+@mixin transform($transform, $only3d: false) {
+  @if $only3d {
+    @include experimental(transform, $transform, -moz, -webkit, -o, -ms, not -khtml, official);
+  }
+  @else {
+    @include experimental(transform, $transform, -moz, -webkit, -o, -ms, not -khtml, official);
+  }
+}
+
+@mixin box-shadow($color: #333333, $hoff: 1px, $voff: 1px, $blur: 5px, $spread: 0, $inset: false) {
+  $full: $color $hoff $voff $blur $spread;
+  @if $inset {
+    @if not ($inset == true or $inset == inset) {
+      @warn "$inset expected to be true or the inset keyword. Got #{$inset} instead. The box shadow will be inset."; }
+      $full: $full inset; }
+  @if $color == none {
+    @include experimental(box-shadow, none, -moz, -webkit, -o, not -ms, not -khtml, official); }
+  @else {
+    @include experimental(box-shadow, $full, -moz, -webkit, -o, not -ms, not -khtml, official);
+  }
+}
+
+button, input, select, textarea {
+  margin: 0 0 $baseline 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+button, input {
+  line-height: normal;
+  *overflow: visible;
+}
+
+button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, input[type="reset"]::-moz-focus-inner {
+  padding: 0 !important;
+  border: 0 none !important;
+}
+
+button, input[type=button], input[type=reset], input[type=submit] {
+  cursor: pointer;
+  *cursor: hand;
+  -webkit-appearance: button;
+}
+
+%button,
+.button,
+button,
+input[type="submit"] {
+  @extend %_button_base;
+  color: $C_secondaryGray !important; // need this for chapstick
+  background: $C_lineGray;
+  @include box-shadow($C_tertiaryGray, 0px, 2px, 0px, 0px);
+
+  &:active {
+    @include box-shadow($C_tertiaryGray, 0px, 0px, 0px, 0px);
+    @include transform(translate(0px, 2px));
+  }
+
+  &:hover {
+    background: opacify($C_lineGray, 0.06);
+  }
+
+  &.disabled,
+  &:disabled {
+    opacity: 0.4;
+    cursor: normal;
+    &:hover {
+      background: $C_lineGray;
+    }
+    &:active {
+      @include transform(translate(0px, 0px));
+      @include box-shadow($C_tertiaryGray, 0px, 2px, 0px, 0px);
+    }
+  }
+
+  .inverted & {
+    color: $C_secondaryGrayInverted !important; // need this for chapstick
+    background: $C_lineGrayInverted;
+    @include box-shadow($C_tertiaryGray, 0px, 2px, 0px, 0px);
+
+    &:active {
+      @include box-shadow($C_tertiaryGray, 0px, 0px, 0px, 0px);
+      @include transform(translate(0px, 2px));
+    }
+
+    &:hover {
+      background: transparentize($C_lineGrayInverted, 0.06);
+    }
+    &.disabled,
+    &:disabled {
+      &:hover {
+        background: $C_lineGrayInverted;
+      }
+    }
+  }
+}
+
+// Primary button
+//
+// this gets a bit lengthy to support
+// the legacy class "primary" on the higher
+// specificity 'input[type="submit"]'
+// ---------------------------
+%button--primary,
+.primary,
+.button.primary,
+.button--primary,
+input[type="submit"].primary,
+input[type="submit"].button--primary {
+  @include button( $C_red, #fff );
+}
+
+// Black button
+// ---------------------------
+%button--black,
+.button--black,
+input[type="submit"].button--black {
+  @include button( #000, #fff );
+}
+
+// Black button
+// ---------------------------
+%button--white,
+.button--white,
+input[type="submit"].button--black {
+  @include button( #fff, $C_red );
+}
+
+// Blue button
+// ---------------------------
+%button--blue,
+.button--blue,
+input[type="submit"].button--blue {
+  @include button( #13a1ff );
+}
+
+
+// input translation fix
+//
+// we can't fix the chrome double click issue
+// without pseudo elements, which don't work on input els
+input[type="submit"]:active {
+  -moz-transform: translate(0px, 0px) !important;
+  -ms-transform: translate(0px, 0px) !important;
+  -o-transform: translate(0px, 0px) !important;
+  -webkit-transform: translate(0px, 0px) !important;
+  transform: translate(0px, 0px) !important;
+}
+
+
+/**
+* ==============================================
+* FLAT BUTTONS
+
+// Flat button (white)
+// ---------------------------
+%button-flat--white,
+.button-flat--white {
+  @include button-flat( #fff );
+}
+
+// Flat button (black)
+// ---------------------------
+%button-flat--black,
+.button-flat--black {
+  @include button-flat( #000 );
+}
+
+// Flat button (red)
+// ---------------------------
+%button-flat--red,
+.button-flat--red {
+  @include button-flat( $C_red );
+}
+
+
+/**
+* ==============================================
+* PHOTO OVERLAY BUTTONS
+*/
+
+// Flat button (use over most photo bgs)
+// ---------------------------
+%button-photo,
+%button-photo--white,
+.button-photo,
+.button-photo--white {
+  @include button-photo( #fff );
+}
+
+$buttonFontSize: 16px;
+
+%_button_base {
+  @include button_personality();
+  @include round(3px);
+  @include inlineblock();
+  @include box-sizing("border");
+  @if $platform == "desktop" {
+    padding: 9px 18px 7px 18px;
+  } @else {
+    padding: 14px 18px 12px 18px;
+  }
+  margin: 0 0 $baseline 0;
+  font-family: $uiControlFontStack;
+  font-weight: $W_bold;
+  font-size: $buttonFontSize;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  border-width: 0;
+  text-align: center;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+  -moz-text-shadow: none;
+  -webkit-text-shadow: none;
+  -ms-text-shadow: none;
+  -o-text-shadow: none;
+  text-shadow: none;
+  &:focus {
+    outline-width: 0;
+  }
+  &.small {
+    font-size: 12px;
+    padding: 5px 14px;
+  }
+
+}
+
+%_button_base_flat {
+  @extend %_button_base;
+  @include transition(all .1s ease-in-out);
+  &, &:active {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    -o-box-shadow: none;
+    -ms-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+// Adds a transparent pseudo element
+// that bleeds about 3px from the top of the button
+// to intercept clicks when the button itself
+// is translated down 2px
+%_chrome_button_fix {
+  position: relative;
+  &:after {
+    content: '';
+    background: transparent;
+    position: absolute;
+    top: -4px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+/**
+* Default button
+*
+* @param $bgColor - background color
+* @param $textColor - text color (calculated from bgColor if unspecified)
+* -----------------------------------------------
+*/
+
+
+/**
+* Flat button
+* @param $color - single border/text/hover color
+* -----------------------------------------------
+*/
+@mixin button-flat( $color ) {
+  @extend %_button_base_flat;
+  color: $color !important;
+  background: transparent;
+  border: 2px solid $color;
+
+  &:hover {
+    background: $color;
+    color: getPrimaryTextColor($color) !important;
+  }
+}
+
+/**
+* Photo button
+* for overlaying photos
+* @param $color - single border/text/hover color
+* -----------------------------------------------
+*/

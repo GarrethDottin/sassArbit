@@ -1,0 +1,297 @@
+/* {{{ Typography modifiers */
+.debug {
+	outline: 1px dotted red;
+	background: pink;
+	color: #555;
+	font-family: Consolas, Monaco, monospace;
+    padding: $spacing/2;
+    &:before {
+        color: blue;
+        content: "DEBUG: ";
+    }
+}
+
+.highlighted {
+	background: $C_yellow;
+}
+.shaded {
+	background-color: $C_gray;
+}
+.shaded-lighter {
+	background-color:$C_gray_lightest;
+}
+.shaded-red {
+	background-color: $C_red;
+	color: white;
+}
+
+// TODO: we probably shouldn't keep this in sassquatch; we only use it once in chapstick
+.shaded-pixelate {
+	// this is a translucent 128x128 overlay that darkens squares of the underlying color
+	// to make it appear blocky/giant-pixelated. It's a cool effect, show your friends!
+	background-image: url('data:image/png;base64,
+		iVBORw0KGgoAAAANSUhEUgAAAIAAAACABAMAAAAxEHz4AAAAIVBMVEUAAAAAAAAAAAAAAAAAAAAA
+		AAAAAAAAAAAAAAAAAAAAAABt0UjBAAAAC3RSTlMTJjIeKDUJLRIkGx47F8wAAACZSURBVHhe7dWx
+		DQJBDETRC0lpgRZogRa2BbdwLbgFWrgqIZhJRkKHRIKs/zPL65futtRdlTrUVXleqrsv/e4XoP8K
+		AAAA2FUetvL+oQx5ngMAAABYfEZnsOc5AAAAQKlNJZgHBr2fAwAAAOQ/4PlbaA4AAABwdmjYQL6b
+		AwAAACyVD0t5/gTPAQAAACwe0U0ZTqjUGAAAAOAFZgxFcV00Xf4AAAAASUVORK5CYII=');
+}
+.leading-top {
+	padding-top: $spacing;
+}
+.leading-bottom {
+	padding-bottom: $spacing;
+}
+.leading-left,
+.padding-left {
+	padding-left: $spacing;
+}
+.leading-right,
+.padding-right {
+	padding-right: $spacing;
+}
+.leading-none,
+.padding-none {
+	padding: 0 !important;
+}
+.leading-all,
+.padding-all {
+	padding: $spacing;
+}
+.margin-all{
+	margin:$spacing;
+}
+.margin-top {
+	margin-top: $spacing;
+}
+.margin-bottom {
+	margin-bottom: $spacing;
+}
+.margin-left {
+	margin-left: $spacing;
+}
+.margin-right {
+	margin-right: $spacing;
+}
+.margin-none {
+	margin: 0 !important;
+}
+.align-right {
+	text-align: right;
+}
+.align-left {
+	text-align: left;
+}
+.align-center {
+	text-align: center;
+}
+.valign-top {
+	vertical-align: top;
+}
+.valign-middle {
+	vertical-align: middle;
+}
+.valign-bottom {
+	vertical-align: bottom;
+}
+/* {{{ TODO: deprecate this */
+.center-able,
+.centered {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+/* }}} */
+/* {{{ TODO: deprecate this */
+.img-align-middle{
+	vertical-align:middle;
+}
+/* }}} */
+.display-none {
+	display: none;
+}
+.hidden {
+	visibility: hidden;
+}
+.block {
+	display: block;
+}
+.inline {
+	display: inline;
+}
+.inline-block {
+    @include inlineblock();
+}
+.muted {
+	@include color_textTertiary();
+
+	.inverted & {
+		@include color_textTertiaryInverted();
+	}
+}
+.muted-opacity{
+    // when over something that isn't just a white background
+    @include opacity(.8);
+}
+.bold {
+	font-weight: $W_bold;
+}
+.italic {
+    font-style: oblique;
+}
+.caps {
+	text-transform: uppercase;
+}
+.small, small {
+	font-size: $smallFontSize;
+	line-height: $smallLineHeight;
+}
+.big {
+    font-size: $bigFontSize;
+	 line-height: $bigLineHeight;
+}
+.opacity-quarter {
+    // what is this used for?
+	@include opacity(.25);
+}
+.border-none {
+	border-width: 0 !important;
+}
+// http://blog.kenneth.io/blog/2012/03/04/word-wrapping-hypernation-using-css/
+// Removed the `word-break: break-all` because it breaks ALL the words, not just
+// the long ones.
+.wrapNice {
+ // Non standard for webkit
+ word-break: break-word;
+
+-webkit-hyphens: auto;
+   -moz-hyphens: auto;
+    -ms-hyphens: auto;
+        hyphens: auto;
+}
+
+.ellipsize{
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+a.unlink{
+	&:link, &:visited {
+		@include color_textSecondary();
+	}
+	.inverted &:link,
+	.inverted &:visited {
+		@include color_textSecondaryInverted();
+	}
+}
+
+/* {{{ Widget helpers (graceful degradation for JS features) */
+.block-if-js,
+.inline-if-js,
+.inline-block-if-js,
+.hasJS .hide-if-js {
+	display: none;
+}
+
+.hasJS .block-if-js			{ display: block; }
+.hasJS .inline-if-js		{ display: inline; }
+.hasJS .inline-block-if-js	{ display: inline-block; }
+/* }}} */
+
+
+@if $platform == "mobile" {
+	/* typographic + layout additions {{{ */
+
+	.left {
+		float:left;
+	}
+	.right {
+		float:right;
+	}
+	.spaced-right { // rename these spaced classes; not explicit about margin vs. padding
+		margin-right:$spacing;
+	}
+	.spaced-right-slight {
+		margin-right:$basePadding;
+	}
+	.spaced-left {
+		margin-left:$spacing;
+	}
+	.flush-top { // TODO: document this or kill it
+		margin-top:0 !important;
+		padding-top:0 !important;
+	}
+	.flush-bottom {
+	  padding-bottom: 0 !important;
+	  margin-bottom: 0 !important; }
+
+	.darker {
+		color: $C_primaryGray;
+
+		.inverted & {
+			color: $C_primaryGrayInverted;
+		}
+	}
+	.light { // TODO: kill this
+		color: #444;
+	}
+	.small, small {
+		font-size: 11px;
+		&.caps {
+			font-size:10px;
+		}
+	}
+	.smaller {
+			 font-size:.85em;
+	}
+
+	.gutter-right {
+		margin-right:$spacing/4;
+	}
+
+	.italic {
+		font-style:italic;
+	}
+
+	// this one only lives in mobile land
+	// we should deprecate this or document &
+	// move it to both platforms
+	@if $platform == "mobile" {
+		.natural-text {
+			color: $C_text !important;
+
+			.natural-text.light {
+				opacity:.7;
+			}
+		}
+	}
+
+	.bold {
+		font-weight: $W_bold;
+	}
+
+	.double-spaced {
+		line-height:1.8;
+	}
+
+	.triple-spaced {
+		line-height:2.8;
+	}
+
+	// 'aliases' only exist for mobile
+	// we should deprecate these or document &
+	// move them to both platforms
+	@if $platform == "mobile" {
+		/* aliases */
+		.lighter { //muted 
+			color: $C_text_less;
+		}
+		.unpadded { //padded-none 
+			padding: 0 !important;
+		}
+	}
+
+	/* }}} */
+}

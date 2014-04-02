@@ -1,0 +1,88 @@
+/**
+* Tabs Pattern
+*/
+
+$tabSpacing: $spacing/2;
+
+.nav-tabs {
+	@extend %clearfix;
+	padding-top: $tabSpacing;
+	padding-left: $tabSpacing;
+	border-bottom: 1px solid;
+	@include color_border('border-color');
+	list-style: none;
+	margin-bottom: 0;
+	li {
+		float: left;
+		padding: 0;
+		margin-right: $tabSpacing;
+		margin-bottom: -1px;
+	}
+	a {
+		@include round-nw($defaultRadius);
+		@include round-ne($defaultRadius);
+		display: block;
+		text-decoration: none;
+		@include color_textSecondary;
+		background-color: $C_backgroundNav;
+		border: 1px solid;
+		@include color_border('border-color');
+		padding: $tabSpacing/1.5 $tabSpacing*1.5;
+		&:focus {
+			outline-width: 0;
+		}
+		img { /*calendar icon*/
+			margin-top: -5px;
+		}
+	}
+	.selected {
+		a {
+			@include color_textPrimary;
+			background-color: $C_primaryGrayInverted;
+			@include color_border('border-color');
+			border-bottom-color: $C_primaryGrayInverted;
+		}
+	}
+	.tabcount {
+		@include color_textTertiary;
+	}
+}
+
+/**
+* override for ghome
+* tabs sit on border of ajax-contaner
+* allows border to span the whole D_box
+*/
+#lma .tabsNav {
+	border-bottom: 0px;
+	background-color: #E9EBE5;
+}
+
+@if $platform == "mobile" {
+	.nav-tabs {
+		padding-left: 0;
+		li {
+			margin-right: 0;
+			&:first-child a {
+				border-left-width: 1px;
+				@include round-nw($defaultRadius);
+			}
+			&:last-child a {
+				@include round-ne($defaultRadius);
+			}
+			&.selected + li a {
+				border-left-width: 1px;
+			}
+		}
+		a {
+			@include round(0);
+			// needs to be a little taller to make bigger touch target
+			padding: $tabSpacing*1.5;
+			border-left-width: 0;
+		}
+		&:first-child {
+			padding-top: $tabSpacing;
+		}
+	}
+}
+

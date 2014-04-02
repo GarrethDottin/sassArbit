@@ -1,0 +1,70 @@
+/*body{
+  margin: 0px;
+  text-align: center;
+  main {
+    background-color: rgb(217, 143, 121);
+  }
+  footer{
+    background-color: #6a7e8a;
+  }
+}
+
+main {
+  width: 100%;
+  height: 420px;
+  .small-box {
+    background-color:#1B879D;
+    margin-top: 150px;
+  }
+}
+
+.small-button {
+  width: 100px;
+  height: 30px;
+}
+
+p {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.main-text {
+  width: 30%;
+  text-align: center;
+  margin: 0px auto;
+}
+
+.small-box {
+  width: 25%;
+  height: 30px;
+  border-radius: 3px;
+  text-align: center;
+  margin: 0px auto;
+  padding-top: 10px;
+}
+
+footer {
+  width: 100%;
+  height: 150px;
+  p {
+    border-bottom: 7px solid White;
+    display: inline-block;
+    margin: 0px auto;
+    margin-top: 20px;
+    font-size: 24px;
+    margin-left: 25px;
+  }
+    &:hover {
+      opacity: .6;
+    }
+}
+
+-Check if nesting worked
+-Add variable for repeating ones
+
+
+/*Color Scheme
+#E1704B
+#39A9A4
+#FFF1D4*/*/

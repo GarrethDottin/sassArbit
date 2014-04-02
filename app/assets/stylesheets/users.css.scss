@@ -1,0 +1,89 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+$fullwidth: 100%;
+$centered: 0px auto;
+$baseline: 18px;
+
+@mixin center {
+  margin: $centered;
+  text-align: center;
+}
+
+body{
+  margin: 0px;
+  text-align: center;
+  main {
+    background-color: rgb(217, 143, 121);
+  }
+  footer{
+    background-color: #6a7e8a;
+  }
+}
+
+main {
+  width: $fullwidth;
+  height: 420px;
+  .medium-button {
+    background-color:#1B879D;
+    margin-top: 150px;
+    color: white;
+  }
+}
+
+.small-button {
+  width: 100px;
+  height: 30px;
+}
+
+button, input, select, textarea {
+  margin: 0 0 $baseline 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.main-title {
+  width: 300px;
+  display: inline-block;
+  position: absolute;
+  left: 20px;
+}
+
+p {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.main-text {
+  width: 30%;
+  @include center;
+}
+
+.medium-button {
+  width: 25%;
+  height: 30px;
+  border-radius: 3px;
+  @include center;
+  padding-top: 10px;
+}
+
+footer {
+  width: $fullwidth;
+  height: 150px;
+
+  p {
+    border-bottom: 7px solid White;
+    display: inline-block;
+    margin: $centered;
+    margin-top: 20px;
+    font-size: 24px;
+    margin-left: 25px;
+
+    &:hover {
+        opacity: .6;
+    }
+  }
+}

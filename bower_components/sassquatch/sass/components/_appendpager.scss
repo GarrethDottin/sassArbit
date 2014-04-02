@@ -1,0 +1,29 @@
+/**
+* "See More" paging pattern
+* append-style pagging at the bottom of a list
+*/
+
+.nav-appendPager {
+	@include round($defaultRadius);
+	border: 1px solid $C_line;
+	display: block;
+	text-align: center;
+	font-family: $headingFontStack;
+	font-weight: $W_bold;
+	font-weight: $W_normal;
+	letter-spacing: 0.04em;
+	color: $C_link;
+	padding: 0.33em 0;
+	margin-bottom: $spacing;
+	cursor: pointer;
+	*cursor: hand; /* IE, you're a complete idiot */
+	@include experimental('user-select', 'none');
+	&:hover {
+		background-color: $C_line_less;
+		text-decoration: none !important;
+	}
+	&:active {
+		@include punched_in_box_shadow;
+		@include box-shadow($C_tertiaryGray, 0px, 2px, 0px, 0px);
+	}
+}
