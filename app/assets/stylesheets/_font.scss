@@ -1,0 +1,83 @@
+$C_textPrimary: rgba(0,0,0,0.95);
+$F_sans: 'Whitney', helvetica, arial, sans-serif;
+$headingFontStack:  $F_sans;
+$baseline: 18px;
+$W_bold: 700;
+$C_textPrimaryInverted: rgb(255,255,255);
+@mixin color_textPrimaryInverted($style: 'color') { #{$style}: $C_textPrimaryInverted; }
+$baseLineHeight:  1.4;
+$W_normal: 400;
+$baseFontStack:       "Helvetica Neue", "Roboto", "Droid Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+$headingFontStack:    $baseFontStack;
+$uiControlFontStack:  $baseFontStack;
+
+$baseFontSize: 12px;
+
+$h1FontSize:  44px;
+$h2FontSize:  34px;
+$h3FontSize:  20px;
+$h4FontSize:  16px;
+$h5FontSize:  $baseFontSize;
+$h6FontSize:  $baseFontSize;
+
+@mixin color_textPrimary($style: 'color') { #{$style}: lighten( rgb(0,0,0), 5%); #{$style}: $C_textPrimary; }
+
+body,h2,h3, p, h4{
+  font-family: 'Open Sans',Helvetica,Arial,sans-serif;
+  font-weight: bold; color: white;}
+
+
+h1,h2,h3,h4,h5,h6 {
+    @include color_textPrimary();
+    font-family: $headingFontStack;
+    margin: 0;
+    padding: 0;
+    color: white;
+    display: inline-block;
+    padding-bottom: $baseline/2;
+    line-height: 1.1;
+    font-weight: $W_bold;
+    .inverted & {
+      @include color_textPrimaryInverted();
+    }
+  }
+  h1 {
+    font-size: 44px;
+    font-family: 'Apercu Regular',Calibri,sans-serif;
+    letter-spacing: -0.75px;
+    font-style: normal;
+    font-weight:300;
+  }
+  h2 {
+    font-size: $h2FontSize;
+    letter-spacing: -0.5px;
+  }
+  h3 {
+    font-size: $h3FontSize;
+    padding-bottom: $baseline/3;
+    line-height: 1.2;
+    letter-spacing: -0.25px;
+  }
+  h4{
+    font-size: $h4FontSize;
+    padding-bottom: 0;
+    line-height: $baseLineHeight;
+    letter-spacing: -0.05px;
+  }
+  h5 {
+    font-size: $h5FontSize;
+    padding-bottom: 0;
+    line-height: $baseLineHeight;
+
+    font-weight: $W_normal;
+  }
+  h6 {
+    font-size: $h6FontSize;
+    padding-bottom: 0;
+    line-height: $baseLineHeight;
+
+    text-transform: uppercase;
+    font-variant: small-caps;
+    font-weight: $W_normal;
+  }
+
