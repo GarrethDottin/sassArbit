@@ -1,89 +1,67 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-$fullwidth: 100%;
-$centered: 0px auto;
-$baseline: 18px;
-
-@mixin center {
-  margin: $centered;
-  text-align: center;
-}
-
-body{
-  margin: 0px;
-  text-align: center;
-  main {
-    background-color: rgb(217, 143, 121);
-  }
-  footer{
-    background-color: #6a7e8a;
-  }
+//
+html {
+  background: url(bear.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 main {
-  width: $fullwidth;
-  height: 420px;
-  .medium-button {
-    background-color:#1B879D;
-    margin-top: 150px;
-    color: white;
-  }
-}
-
-.small-button {
-  width: 100px;
-  height: 30px;
-}
-
-button, input, select, textarea {
-  margin: 0 0 $baseline 0;
-  vertical-align: baseline;
-  *vertical-align: middle;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.main-title {
-  width: 300px;
-  display: inline-block;
   position: absolute;
-  left: 20px;
+  text-align:center;
+  top: 30%;
+  left: 30%;
+  color: white;
+  width: 450px;
 }
 
-p {
-  font-size: 20px;
-  font-weight: bold;
+.days {
+  border-bottom: 4px solid white;
   color: white;
 }
 
-.main-text {
-  width: 30%;
-  @include center;
+.days:hover {
+  opacity: .6;
 }
 
-.medium-button {
-  width: 25%;
-  height: 30px;
-  border-radius: 3px;
-  @include center;
-  padding-top: 10px;
-}
-
-footer {
-  width: $fullwidth;
-  height: 150px;
-
-  p {
-    border-bottom: 7px solid White;
-    display: inline-block;
-    margin: $centered;
-    margin-top: 20px;
-    font-size: 24px;
-    margin-left: 25px;
-
-    &:hover {
-        opacity: .6;
-    }
-  }
+.toggle-button {
+  -webkit-background-clip: border-box;
+  -webkit-background-origin: padding-box;
+  -webkit-background-size: auto;
+  -webkit-font-smoothing: antialiased;
+  background-attachment: scroll;
+  background-origin: padding-box;
+  background-size: auto;
+  border-radius: 5px;
+  border-bottom-width: 2px;
+  border-color: rgb(255, 153, 105);
+  border-style: solid;
+  border-right-color: rgb(255, 153, 105);
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-top-color: rgb(255, 153, 105);
+  border-top-style: solid;
+  border-width: 2px;
+  box-sizing: border-box;
+  color: rgb(255, 153, 105);
+  cursor: auto;
+  display: inline-block;
+  font-family: 'Apercu Regular', Calibri, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: normal;
+  height: 42px;
+  outline-width: 0px;
+  padding-bottom: 8px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 6px;
+  text-align: center;
+  text-decoration: none solid rgb(255, 153, 105);
+  visibility: visible;
+  width: 133px;
 }

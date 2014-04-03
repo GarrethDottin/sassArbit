@@ -1,11 +1,9 @@
-body,h2,h3, h4{
+body,h2,h3, p, h4{
   font-family: 'Open Sans',Helvetica,Arial,sans-serif;
-  font-weight: bold;}
+  font-weight: bold; color: white;}
 
-h1 {font: 300 32px/36px proxima-nova, "helvetica neue", helvetica, sans-serif;
-  font-weight: 600;}
-
-h2 {font-size: 28px;color: #323232;}
+h1 {font-size: 44px;}
+h2 {font-size: 34px;}
 
 h3 {font-size: 20px;}
 
